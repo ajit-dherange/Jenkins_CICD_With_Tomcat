@@ -1,4 +1,4 @@
-# Jenkins CICD Pipelive with Tomcat
+# Jenkins CICD Pipeline with Tomcat
 
 ### Prerequisite:
 
