@@ -10,8 +10,8 @@ yum install git -y
 # sudo dnf install java-11-amazon-corretto -y
 sudo amazon-linux-extras install java-openjdk11 -y
 
-For "Amazon Linux 2003" AMI, use command: # sudo dnf install java-11-amazon-corretto -y
-For "Amazon Linux 2" AMI, use : # sudo amazon-linux-extras install java-openjdk11 -y
+## For "Amazon Linux 2003" AMI, use command: # sudo dnf install java-11-amazon-corretto -y
+## For "Amazon Linux 2" AMI, use : # sudo amazon-linux-extras install java-openjdk11 -y
 
 Add inbound rule to allow traffic on the port 8080
 ```
@@ -31,7 +31,7 @@ sudo tar -xvf apache-tomcat-9.0.75.tar.gz
 sudo chown ec2-user -R /home/ec2-user/apache-tomcat-9.0.75/
 sh startup.sh
 
-Add inbound rule to allow traffic on the port 8080
+Add inbound rule to allow traffic on the port 8080 and verify Tomcat is accessible http://172.31.4.56:8080
 
 Vi /home/ec2-user/apache-tomcat-9.0.75/webapps/manager/META-INF/contex.xml
 inside valve section make allow ".*" (remove all other)
@@ -43,6 +43,7 @@ Vi /home/ec2-user/apache-tomcat-9.0.75/conf/tomcat-users.xml (add tomct & admin)
 <user username="tomcat" password="tomcat" roles="manager-gui"/>
 <user username="admin" password="Admin@123" roles="manager-script,manager-status,admin-gui,manager-gui"/>
 
+## Verify Tomcat From Local PC
 git clone https://github.com/MRaju2022/mvn-web-app.git
 mvn clean package
 check \\mvn-web-app\target
@@ -103,7 +104,8 @@ workspace /var/lib/jenkins/workspace/DevOps01
 Now we need to deploy the war file into the Tomcat (Test) Server.
   
 19) install "deploy to container" plugin.
-Go to Dashboard > Click on manage Jenkins > Click on manage plugins > Click on available section > Search for plugin ( deploy to container)
+	
+Go to Dashboard > Click on manage Jenkins > Click on manage plugins > Click on available section > Search for plugin (deploy to container) > 
 Select that plugin and click on install without restart.
   
 20) Click on post build actions of the development job
@@ -131,7 +133,7 @@ Select credentials.
   
 give the private ip of the Tomcat server (Test).
   
-http://private_ip:8080 >> http://172.31.4.56:8080
+http://private_ip:8080 >> http://192.168.1.4:8080
   
 27) Run the job
   
