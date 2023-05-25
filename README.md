@@ -2,7 +2,7 @@
 
 ### Prerequisite:
 
-1) Jenkins Server
+1) Jenkins Server (One Ec2 Instance)
 ```
 #! /bin/bash -ex
 yum update -y
@@ -14,26 +14,26 @@ sudo amazon-linux-extras install java-openjdk11 -y
 ## For "Amazon Linux 2003" AMI, use command: # sudo dnf install java-11-amazon-corretto -y
 ## For "Amazon Linux 2" AMI, use : # sudo amazon-linux-extras install java-openjdk11 -y
 
-# sudo yum update –y
-Add the Jenkins repo using the following command:
-# sudo wget -O /etc/yum.repos.d/jenkins.repo \
+sudo yum update –y
+# Add the Jenkins repo using the following command:
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
         https://pkg.jenkins.io/redhat-stable/jenkins.repo
-Import a key file from Jenkins-CI to enable installation from the package:
-# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-# sudo yum upgrade
-Install Jenkins:
-# sudo yum install jenkins -y
-Enable the Jenkins service to start at boot:
-# sudo systemctl enable jenkins
-Start Jenkins as a service:
-# sudo systemctl start jenkins
-You can check the status of the Jenkins service using the command:
-# sudo systemctl status jenkins
+# Import a key file from Jenkins-CI to enable installation from the package:
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+# Install Jenkins:
+sudo yum install jenkins -y
+# Enable the Jenkins service to start at boot:
+sudo systemctl enable jenkins
+# Start Jenkins as a service:
+sudo systemctl start jenkins
+# You can check the status of the Jenkins service using the command:
+sudo systemctl status jenkins
 
-Add inbound rule to allow traffic on the port 8080
+_Add inbound rule to allow traffic on the port 8080_
 ```
 
-2) Tomcat Server
+2) Tomcat Server (Two EC2 instances - one for QA environment and another for PROD environment) 
 ```
 #! /bin/bash -ex
 yum update -y
@@ -49,7 +49,7 @@ sudo chown ec2-user -R /home/ec2-user/apache-tomcat-9.0.75/
 cd /home/ec2-user/apache-tomcat-9.0.75/bin
 sh startup.sh
 
-Add inbound rule to allow traffic on the port 8080
+_Add inbound rule to allow traffic on the port 8080_
 
 cd /home/ec2-user/apache-tomcat-9.0.75/webapps/manager/META-INF/
 vi contex.xml
@@ -86,9 +86,10 @@ goto tomcat > manager app > choose war file > deploy
 6) Click on apply and save
 7) Run the Job (click on Build Now)
 8) Check the console output 
-8) Connect to the Jenkins server
-9) Go to the location where code is downloaded
-Ls -l <path> (/var/lib/jenkins/workspace/demojob)
+9) Connect to the Jenkins server
+10) Go to the location where code is downloaded >> # ls -l <workspace path>
+	
+Workspace: /var/lib/jenkins/workspace/Development
 
 ### Stage 2 : Continuous Build - Convert the java files in to artifact ( .war file)
   
@@ -102,13 +103,10 @@ Ls -l <path> (/var/lib/jenkins/workspace/demojob)
 15) click on apply and save
 16) Run the Job (click on Build Now)
 17) Click on number & click on console output
-18) Copy the path of the war file and check the file in the Linux machine
-
-Ls -l <path> (/var/lib/jenkins/workspace/demojob/webapp/target/webapp.war)
-
-workspace /var/lib/jenkins/workspace/DevOps01
+18) Copy the path of the war file and check the file in the Linux machine >> # ls -l <workspace path>
 	
-/var/lib/jenkins/workspace/DevOps01/webapp/target/webapp.war
+Workspace: /var/lib/jenkins/workspace/Development
+Artifact: /var/lib/jenkins/workspace/Development/webapp/target/webapp.war
 
 ### Stage 3 : Continuous Deployment - Deploy artifact ( .war file) to Container App (Tomcat qa Server)  
 	• Install plugin deploy to container (Manage Jenkins >> Manage plugins > Available plugins > Search "deploy to container" > Select and click on install without restart
@@ -125,13 +123,10 @@ workspace /var/lib/jenkins/workspace/DevOps01
 25) enter tomcat user name and password
 25) Click on add
 25) Select credentials.
-25) give the private ip of the Tomcat server (Test).
-http://private_ip:8080 >> http://172.31.4.56:8080
+25) give the private ip of the Tomcat qa server >> http://private_ip:8080 > http://172.31.4.56:8080
 26) Save the job
 27) Run the job (click on Build Now)
-28) To access the home page
-	
-http://<public_ip_Tomcat_server>:8080/qaenv  >>  http://172.31.4.56:8080/qaenv
+28) To access the home page >> http://<public_ip_Tomcat_server>:8080/qaenv >  http://172.31.4.56:8080/qaenv
 
 ### Stage 4 Continuous Testing
 1) Login to the Jenkins server
@@ -170,6 +165,5 @@ http://<public_ip_Tomcat_server>:8080/qaenv  >>  http://172.31.4.56:8080/qaenv
 22) Enter private ip:8080 of the prod server >> http://172.31.39.130:8080
 23) Click on Apply and save
 24) Run the job  (click on Build Now)
-25) To access the home page
-http://<public_ip_Tomcat_server>:8080/prod  >>  http://172.31.4.56:8080/prod
+25) To access the home page >> http://<public_ip_Tomcat_server>:8080/prod >  http://172.31.4.56:8080/prod
 
