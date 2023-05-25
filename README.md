@@ -100,7 +100,7 @@ Ls -l <path> (/var/lib/jenkins/workspace/demojob)
 13) Click on Invoke top level maven targets
 14) Enter the goal as  "clean package"
 15) click on apply and save
-16) Run the Job
+16) Run the Job (click on Build Now)
 17) Click on number & click on console output
 18) Copy the path of the war file and check the file in the Linux machine
 
@@ -120,25 +120,56 @@ workspace /var/lib/jenkins/workspace/DevOps01
  we can give **/*.war in war/ear files.
 24) Context path: qaenv
 25) Containers : select tomcat 9
-	
-Credentials : Click on add
-	
-select Jenkins
-	
-enter tomcat user name and password
-	
-Click on add
-	
-Select credentials.
-	
-give the private ip of the Tomcat server (Test).
-	
+25) Credentials : Click on add
+25) select Jenkins
+25) enter tomcat user name and password
+25) Click on add
+25) Select credentials.
+25) give the private ip of the Tomcat server (Test).
 http://private_ip:8080 >> http://172.31.4.56:8080
-	
-27) Run the job
+26) Save the job
+27) Run the job (click on Build Now)
 28) To access the home page
 	
 http://<public_ip_Tomcat_server>:8080/qaenv  >>  http://172.31.4.56:8080/qaenv
 
-  
+### Stage 4 Continuous Testing
+1) Login to the Jenkins server
+2) Create New item as free style project >> Testing
+3) Click on source code management 
+4) Select GIT
+5) Enter the URL of GitHub repository https://github.com/ajit2411/TestingNew
+6) Click on apply and save
+7) Run the Job (click on Build Now)
+8) Check the console output 
+
+### Stage 5  Continuous Delivery
+	• Install plugin copy artifacts (Manage Jenkins >> Manage plugins > Available plugins > Search "copy artifacts" > Select and click on install without restart
+
+1) Go to Development job 
+2) Go to Configure
+3) Go to Post build actions tab
+4) Click on add post build action
+5) Click on Archive the artifacts
+6) Enter **/*.war
+7) Click on apply and save
+8) Go to Testing Job
+9) Click on configure
+10) Go to Build section
+11) Click on add build steps
+12) Click on copy artifacts from another project
+13) Enter Development as project name
+14) For Deployment Go to Post build actions section
+15) Click on add post build action
+16) Click on deploy war/ear to a container
+17) Enter **/*.war in war/ear files
+18) Context path: prod
+19) Click on add container 
+20) Select tomcat 9
+21) Select your Credentials
+22) Enter private ip:8080 of the prod server >> http://172.31.39.130:8080
+23) Click on Apply and save
+24) Run the job  (click on Build Now)
+25) To access the home page
+http://<public_ip_Tomcat_server>:8080/prod  >>  http://172.31.4.56:8080/prod
 
