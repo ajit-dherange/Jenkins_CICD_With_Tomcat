@@ -109,12 +109,7 @@ workspace /var/lib/jenkins/workspace/DevOps01
 /var/lib/jenkins/workspace/DevOps01/webapp/target/webapp.war
 
 ### Stage 3 : Continuous Deployment - Deploy artifact ( .war file) to Container App (Tomcat qa Server)  
-• Install Plugins
-1) Go to Jenkins dashboard
-2) Go to manage Jenkins
-3) Click on Manage plugins
-4) Search for "deploy to container"  plugin
-5) Select that plugin and click on install without restart
+	• Install plugin deploy to container (Manage Jenkins >> Manage plugins > Available plugins > Search "deploy to container" > Select and click on install without restart
   
 20) Click on post build actions of the Development job
 21) Click on add post build actions
