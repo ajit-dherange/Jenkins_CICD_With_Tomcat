@@ -83,7 +83,7 @@ goto tomcat > manager app > choose war file > deploy
 	• Add JDK (Manage Jenkins >> Global Tool Configuration > Add JDK > Install Automatically)
   
 1) Login to the Jenkins server
-2) Create New item as free style project
+2) Create New item as free style project >> Development
 4) Click on source code management
 5) Select GIT
 7) Enter the URL of GitHub repository https://github.com/ajit2411/maven.git
@@ -91,11 +91,11 @@ goto tomcat > manager app > choose war file > deploy
 7) Run the Job (click on Build Now)
 8) Check the console output 
 9) Connect to the Jenkins server
-10) Go to the location where code is downloaded >> # ls -l workspace_path
+10) Go to the location where code is downloaded >> $ ls -l workspace_path
 	
 Workspace_path: /var/lib/jenkins/workspace/Development
 
-### Stage 2 : Continuous Build - Convert the java files in to artifact ( .war file)
+### Stage 2 : Continuous Build - Convert the java files in to Artifacts ( .war file)
   
 	• Add Maven (Manage Jenkins >> Global Tool Configuration > Maven > Give name: Maven-3.8.6)
   
@@ -107,7 +107,7 @@ Workspace_path: /var/lib/jenkins/workspace/Development
 15) click on apply and save
 16) Run the Job (click on Build Now)
 17) Click on number & click on console output
-18) Copy the path of the war file and check the file in the Linux machine >> # ls -l workspace_path
+18) Copy the path of the war file and check the file in the Linux machine >> $ ls -l workspace_path
 	
 Workspace_path: /var/lib/jenkins/workspace/Development
 
@@ -119,8 +119,7 @@ Artifacts_path: /var/lib/jenkins/workspace/Development/webapp/target/webapp.war
 20) Click on post build actions of the Development job
 21) Click on add post build actions
 22) Click on deploy war/ear to container
-23) Enter the path of the war file (or)
- we can give "**/*.war" in war/ear files
+23) Enter the path of the war file (or) give "**/*.war" in war/ear files
 24) Context path: qaenv
 25) Containers: select tomcat9
 25) Credentials: Click on add
