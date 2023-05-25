@@ -97,7 +97,7 @@ Workspace_path: /var/lib/jenkins/workspace/Development
 
 ### Stage 2 : Continuous Build - Convert the java files in to artifact ( .war file)
   
-	• Add Maven (Manage Jenkins >> Global Tool Configuration > Maven > Give name: Maven-3.8.6
+	• Add Maven (Manage Jenkins >> Global Tool Configuration > Maven > Give name: Maven-3.8.6)
   
 10) Click on configure of the same job Development 
 11) Go to Build Section
@@ -144,7 +144,7 @@ Artifacts_path: /var/lib/jenkins/workspace/Development/webapp/target/webapp.war
 8) Check the console output 
 
 ### Stage 5  Continuous Delivery
-	• Install plugin copy artifacts (Manage Jenkins >> Manage plugins > Available plugins > Search "copy artifacts" > Select and click on install without restart
+	• Install plugin copy artifacts (Manage Jenkins >> Manage plugins > Available plugins > Search "copy artifacts" > Select and click on install without restart)
 
 1) Go to Development job 
 2) Go to Configure
