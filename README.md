@@ -40,34 +40,38 @@ yum update -y
 # sudo dnf install java-11-amazon-corretto -y
 amazon-linux-extras install java-openjdk11 -y
 
-java --version
-
-sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
-sudo tar -xvf apache-tomcat-9.0.75.tar.gz
-
-sudo chown ec2-user -R /home/ec2-user/apache-tomcat-9.0.75/
-cd /home/ec2-user/apache-tomcat-9.0.75/bin
-sh startup.sh
-
 _Add inbound rule to allow traffic on the port 8080_
 
+# Install Tomcat:
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
+sudo tar -xvf apache-tomcat-9.0.75.tar.gz
+# Update permission on Tomcat folder:
+sudo chown ec2-user -R /home/ec2-user/apache-tomcat-9.0.75/
+# Start Tomcat:
+cd /home/ec2-user/apache-tomcat-9.0.75/bin
+sh startup.sh
+# Allow permission to access Tomcat Manager:
 cd /home/ec2-user/apache-tomcat-9.0.75/webapps/manager/META-INF/
 vi contex.xml
 inside valve section make allow ".*" (remove all other)
-
+# Allow permission to access Tomcat Host-Manager:
 cd  /home/ec2-user/apache-tomcat-9.0.75/webapps/host-manager/META-INF
 Vi contex.xml
 inside valve section make allow ".*" (remove all other)
-
+# Allow permission to users:
 cd /home/ec2-user/apache-tomcat-9.0.75/conf/
 Vi tomcat-users.xml (add tomct & admin)
 <user username="tomcat" password="tomcat" roles="manager-gui"/>
 <user username="admin" password="Admin@123" roles="manager-script,manager-status,admin-gui,manager-gui"/>
+# Restart Tomcat:
+cd /home/ec2-user/apache-tomcat-9.0.75/bin
+sh shutdown.sh
+sh startup.sh
 
-## Verify Tomcat From Local PC (**Optional**)
+## Optional - Verify Tomcat From Local PC
 git clone https://github.com/ajit2411/mvn-web-app.git
 mvn clean package
-check \\mvn-web-app\target
+check path \\mvn-web-app\target
 goto tomcat > manager app > choose war file > deploy 
 update index.jsp & war file
 goto tomcat > manager app > undeploy
@@ -106,6 +110,7 @@ Workspace_path: /var/lib/jenkins/workspace/Development
 18) Copy the path of the war file and check the file in the Linux machine >> # ls -l workspace_path
 	
 Workspace_path: /var/lib/jenkins/workspace/Development
+
 Artifacts_path: /var/lib/jenkins/workspace/Development/webapp/target/webapp.war
 
 ### Stage 3 : Continuous Deployment - Deploy artifact ( .war file) to Container App (Tomcat qa Server)  
