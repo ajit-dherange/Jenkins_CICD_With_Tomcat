@@ -7,27 +7,28 @@
 #! /bin/bash -ex
 yum update -y
 yum install git -y
-# sudo dnf install java-11-amazon-corretto -y
+yum install maven -y
+#sudo dnf install java-11-amazon-corretto -y
 sudo amazon-linux-extras install java-openjdk11 -y
 
 ## For "Amazon Linux 2003" AMI, use command: # sudo dnf install java-11-amazon-corretto -y
 ## For "Amazon Linux 2" AMI, use : # sudo amazon-linux-extras install java-openjdk11 -y
 
-    # sudo yum update –y
-    Add the Jenkins repo using the following command:
-    # sudo wget -O /etc/yum.repos.d/jenkins.repo \
+# sudo yum update –y
+Add the Jenkins repo using the following command:
+# sudo wget -O /etc/yum.repos.d/jenkins.repo \
         https://pkg.jenkins.io/redhat-stable/jenkins.repo
-    Import a key file from Jenkins-CI to enable installation from the package:
-    # sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-    # sudo yum upgrade
-    Install Jenkins:
-    # sudo yum install jenkins -y
-    Enable the Jenkins service to start at boot:
-    # sudo systemctl enable jenkins
-    Start Jenkins as a service:
-   # sudo systemctl start jenkins
-    You can check the status of the Jenkins service using the command:
-    # sudo systemctl status jenkins
+Import a key file from Jenkins-CI to enable installation from the package:
+# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+# sudo yum upgrade
+Install Jenkins:
+# sudo yum install jenkins -y
+Enable the Jenkins service to start at boot:
+# sudo systemctl enable jenkins
+Start Jenkins as a service:
+# sudo systemctl start jenkins
+You can check the status of the Jenkins service using the command:
+# sudo systemctl status jenkins
 
 Add inbound rule to allow traffic on the port 8080
 ```
@@ -45,13 +46,13 @@ sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0
 sudo tar -xvf apache-tomcat-9.0.75.tar.gz
 
 sudo chown ec2-user -R /home/ec2-user/apache-tomcat-9.0.75/
- cd /home/ec2-user/apache-tomcat-9.0.75/bin
+cd /home/ec2-user/apache-tomcat-9.0.75/bin
 sh startup.sh
 
 Add inbound rule to allow traffic on the port 8080
 
- cd /home/ec2-user/apache-tomcat-9.0.75/webapps/manager/META-INF/
- vi contex.xml
+cd /home/ec2-user/apache-tomcat-9.0.75/webapps/manager/META-INF/
+vi contex.xml
 inside valve section make allow ".*" (remove all other)
 
 cd  /home/ec2-user/apache-tomcat-9.0.75/webapps/host-manager/META-INF
@@ -106,6 +107,7 @@ Ls -l <path> (/var/lib/jenkins/workspace/demojob)
 Ls -l <path> (/var/lib/jenkins/workspace/demojob/webapp/target/webapp.war)
 
 workspace /var/lib/jenkins/workspace/DevOps01
+	
 /var/lib/jenkins/workspace/DevOps01/webapp/target/webapp.war
 
 ### Stage 3 : Continuous Deployment - Deploy artifact ( .war file) to Container App (Tomcat qa Server)  
@@ -118,16 +120,25 @@ workspace /var/lib/jenkins/workspace/DevOps01
  we can give **/*.war in war/ear files.
 24) Context path: qaenv
 25) Containers : select tomcat 9
+	
 Credentials : Click on add
+	
 select Jenkins
+	
 enter tomcat user name and password
+	
 Click on add
+	
 Select credentials.
+	
 give the private ip of the Tomcat server (Test).
+	
 http://private_ip:8080 >> http://172.31.4.56:8080
+	
 27) Run the job
 28) To access the home page
-http://<public_ip_Tomcat_server>:8080/qaenv  >>  http://172.31.4.56:8080/qaenv![image](https://github.com/ajit-dherange/Jenkins_CICD_With_Tomcat/assets/45383984/16ec3b3a-2544-447b-b41f-64fbe30f1a35)
+	
+http://<public_ip_Tomcat_server>:8080/qaenv  >>  http://172.31.4.56:8080/qaenv
 
   
 
