@@ -173,3 +173,5 @@ Artifacts_path: /var/lib/jenkins/workspace/Development/webapp/target/webapp.war
 24) Run the job  (click on Build Now)
 25) To access the home page >> http://<public_ip_Tomcat_server>:8080/prod >  http://172.31.4.56:8080/prod
 
+
+ref: https://techviewleo.com/install-tomcat-on-amazon-linux/?expand_article=1
