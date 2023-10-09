@@ -43,6 +43,8 @@ amazon-linux-extras install java-openjdk11 -y
 _Add inbound rule to allow traffic on the port 8080_
 
 # Install Tomcat:
+## export VER="9.0.80"
+## wget https://archive.apache.org/dist/tomcat/tomcat-9/v${VER}/bin/apache-tomcat-${VER}.tar.gz
 sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
 sudo tar -xvf apache-tomcat-9.0.75.tar.gz
 # Update permission on Tomcat folder:
