@@ -8,8 +8,8 @@
 yum update -y
 yum install git -y
 yum install maven -y
-#sudo dnf install java-11-amazon-corretto -y
-sudo amazon-linux-extras install java-openjdk11 -y
+sudo dnf install java-11-amazon-corretto -y
+# sudo amazon-linux-extras install java-openjdk11 -y
 
 ## For "Amazon Linux 2003" AMI, use command: # sudo dnf install java-11-amazon-corretto -y
 ## For "Amazon Linux 2" AMI, use : # sudo amazon-linux-extras install java-openjdk11 -y
@@ -37,8 +37,10 @@ _Add inbound rule to allow traffic on the port 8080_
 ```
 #! /bin/bash -ex
 yum update -y
-# sudo dnf install java-11-amazon-corretto -y
-amazon-linux-extras install java-openjdk11 -y
+yum install git -y
+# yum install maven -y
+sudo dnf install java-11-amazon-corretto -y
+# amazon-linux-extras install java-openjdk11 -y
 
 _Add inbound rule to allow traffic on the port 8080_
 
