@@ -46,6 +46,7 @@ _Add inbound rule to allow traffic on the port 8080_
 ## export VER="9.0.80"
 ## wget https://archive.apache.org/dist/tomcat/tomcat-9/v${VER}/bin/apache-tomcat-${VER}.tar.gz
 sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
+# or https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
 sudo tar -xvf apache-tomcat-9.0.75.tar.gz
 # Update permission on Tomcat folder:
 sudo chown ec2-user -R /home/ec2-user/apache-tomcat-9.0.75/
@@ -71,7 +72,7 @@ sh shutdown.sh
 sh startup.sh
 
 ## Optional - Verify Tomcat From Local PC
-git clone https://github.com/ajit2411/mvn-web-app.git
+git clone https://github.com/ajit-dherange/maven_web_app.git
 mvn clean package
 check path \\mvn-web-app\target
 goto tomcat > manager app > choose war file > deploy 
@@ -88,7 +89,7 @@ goto tomcat > manager app > choose war file > deploy
 2) Create New item as free style project >> Development
 4) Click on source code management
 5) Select GIT
-7) Enter the URL of GitHub repository https://github.com/ajit2411/maven.git
+7) Enter the URL of GitHub repository https://github.com/ajit-dherange/maven_web_app.git
 6) Click on apply and save
 7) Run the Job (click on Build Now)
 8) Check the console output 
@@ -99,7 +100,7 @@ Workspace_path: /var/lib/jenkins/workspace/Development
 
 ### Stage 2 : Continuous Build - Convert the java files in to Artifacts ( .war file)
   
-	• Add Maven (Manage Jenkins >> Global Tool Configuration > Maven > Give name: Maven-3.8.6)
+	• Add Maven (Manage Jenkins >> Global Tool Configuration > Maven > Give name: Maven-3.8.6 or 3.9.1)
   
 10) Click on configure of the same job Development 
 11) Go to Build Section
