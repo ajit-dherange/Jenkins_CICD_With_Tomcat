@@ -173,5 +173,30 @@ Artifacts_path: /var/lib/jenkins/workspace/Development/webapp/target/webapp.war
 24) Run the job  (click on Build Now)
 25) To access the home page >> http://<public_ip_Tomcat_server>:8080/prod >  http://172.31.4.56:8080/prod
 
+### Stage: Email Integration
+
+In case, if a job fails , we need to send notificiation. For that we need to integrate jenkins to smtp server.
+
+We are now integrating jenkins with gmail smtp server. (Search in google "gmail smtp server")
+
+```
+Manage Jenkins --- Configure System ----- Email Notification
+
+SMTP Server - smtp.gmail.com
+Click on Advance button ( with notepad icon )
+USE SMTP Authentication
+Username - ajit.dherange@gmail.com
+Password - password for the above email
+use SSL
+SMTP Port - 465
+
+Test Configuration by sending e-mail.
+Test email Receipent - sunildevops77@gmail.com
+
+Gmail Settings to get email from jenkins:
+1) Goto google account -- Less secure app access --- Allow less secure apps: ON
+2) "Disable captcha gmail"
+Search in google "Disable captcha gmail" -- Continue
+```
 
 ref: https://techviewleo.com/install-tomcat-on-amazon-linux/?expand_article=1
